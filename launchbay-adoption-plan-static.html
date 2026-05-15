@@ -1,0 +1,3257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Launchbay Adoption Plan — Digital Client-Written Articles</title>
+<!-- Chart.js replaced with static SVG -->
+<!-- Mermaid pre-rendered to static SVG -->
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1a2332;
+  background: #fafaf8;
+  line-height: 1.5;
+  font-size: 14.5px;
+}
+.container { max-width: 1180px; margin: 0 auto; padding: 28px 28px 60px; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0f1a2e 0%, #0b5563 100%);
+  color: white;
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+.hero .eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #93c5fd;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+.hero .sub {
+  font-size: 15px;
+  color: #cbd5e1;
+  margin: 0 0 18px 0;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 6px;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.hero-stat .v { font-size: 20px; font-weight: 700; }
+.hero-stat .l { font-size: 11px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+/* Hero arc (story-style in header) */
+.hero-arc {
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr 50px 1fr;
+  gap: 8px;
+  align-items: center;
+  margin: 24px 0 18px;
+}
+.ha-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.ha-card.now { border-left: 4px solid #94a3b8; }
+.ha-card.mid { border-left: 4px solid #fbbf24; background: rgba(251, 191, 36, 0.08); }
+.ha-card.end { border-left: 4px solid #34d399; background: rgba(52, 211, 153, 0.08); }
+.ha-tag {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #cbd5e1;
+  background: rgba(255,255,255,0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.ha-card.mid .ha-tag { color: #fef3c7; background: rgba(251, 191, 36, 0.15); }
+.ha-card.end .ha-tag { color: #d1fae5; background: rgba(52, 211, 153, 0.15); }
+.ha-big {
+  font-size: 38px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.ha-label {
+  font-size: 12px;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+}
+.ha-line {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 6px;
+}
+.ha-card.mid .ha-line { color: #fbbf24; }
+.ha-card.end .ha-line { color: #34d399; }
+.ha-stats {
+  font-size: 11.5px;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+.ha-link {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+.ha-track {
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+.ha-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #fbbf24, #34d399);
+  border-radius: 3px;
+}
+
+.hero-chips {
+  margin-top: 4px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+.hero-chips .dot { color: #475569; }
+.hero-links {
+  margin-top: 16px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.hero-links a {
+  color: #93c5fd;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(147, 197, 253, 0.5);
+  padding-bottom: 1px;
+  transition: color 0.2s;
+}
+.hero-links a:hover { color: white; border-bottom-color: white; }
+
+/* Section heading (standalone — for non-collapsible sections) */
+.h-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 44px 0 16px 0;
+  padding-top: 12px;
+  border-top: 2px solid #1a2332;
+}
+.h-row h2 {
+  font-size: 24px;
+  text-transform: none;
+  letter-spacing: -0.4px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin: 0;
+  line-height: 1.15;
+}
+.h-row .h-aside {
+  font-size: 12.5px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Collapsible sections */
+details.sect {
+  margin-top: 28px;
+}
+details.sect > summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px 14px 18px;
+  margin: 0;
+  border: 1px solid #e5e2dc;
+  border-top: 3px solid #1a2332;
+  border-radius: 10px;
+  background: #fafaf8;
+  transition: background 0.15s, border-color 0.15s;
+}
+details.sect > summary::-webkit-details-marker { display: none; }
+details.sect > summary:hover {
+  background: #f3f0e9;
+  border-top-color: #0b5563;
+}
+details.sect > summary > .h-row-inner {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+details.sect > summary h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin: 0;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+details.sect > summary .h-aside {
+  font-size: 12.5px;
+  color: #6b7280;
+  font-style: italic;
+}
+.sect-toggle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 50%;
+}
+details.sect[open] > summary {
+  background: #f3f0e9;
+  border-top-color: #0b5563;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+details.sect[open] > summary .sect-toggle {
+  transform: rotate(90deg);
+  color: #0b5563;
+  border-color: #0b5563;
+}
+details.sect > .sect-body {
+  border: 1px solid #e5e2dc;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 22px;
+  background: white;
+}
+
+/* STORY ARC */
+.arc {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  gap: 8px;
+  align-items: stretch;
+}
+.arc-card {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 16px;
+  position: relative;
+}
+.arc-card.now { border-left: 4px solid #6b7280; }
+.arc-card.target { border-left: 4px solid #d97706; }
+.arc-card.future { border-left: 4px solid #047857; }
+.arc-card .when {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+.arc-card .tag {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  color: #6b7280;
+  background: #f3f0e9;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.arc-card.now .tag { background: #f3f4f6; color: #6b7280; }
+.arc-card.target .tag { background: #fef3c7; color: #92400e; }
+.arc-card.future .tag { background: #d1fae5; color: #065f46; }
+.arc-card .big {
+  font-size: 44px;
+  font-weight: 800;
+  color: #0f1a2e;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.arc-card .label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.arc-card .detail {
+  font-size: 11.5px;
+  color: #6b7280;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #e5e2dc;
+}
+.arc-card .story-line {
+  font-size: 15px;
+  color: #1a2332;
+  line-height: 1.35;
+  font-weight: 500;
+  padding-top: 12px;
+  border-top: 1px solid #f0ede7;
+  margin-bottom: 8px;
+}
+.arc-card .story-line strong {
+  color: #0b5563;
+  font-weight: 700;
+}
+.arc-card.target .story-line strong { color: #d97706; }
+.arc-card.future .story-line strong { color: #047857; }
+.arc-card .story-stats {
+  font-size: 11.5px;
+  color: #6b7280;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.arc-card .story-stats span { white-space: nowrap; }
+.arc-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #cbd5e1;
+  font-weight: 300;
+}
+
+/* THIS WEEK */
+.actions {
+  background: #fef9e7;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.actions h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #92400e;
+  margin: 0 0 12px 0;
+  font-weight: 700;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.action {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: white;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.action .check {
+  width: 18px; height: 18px;
+  border: 2px solid #d97706;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.action .text {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.action .text b { color: #0f1a2e; }
+.action .who {
+  font-size: 10.5px;
+  color: #92400e;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+/* PHASES V2 (30/60/90 redesigned) */
+.phases-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.phase-v2 {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 12px;
+  overflow: hidden;
+  border-left: 5px solid #6b7280;
+}
+.phase-v2.p1 { border-left-color: #0b5563; }
+.phase-v2.p2 { border-left-color: #d97706; }
+.phase-v2.p3 { border-left-color: #047857; }
+.phase-head {
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #fafaf8;
+  border-bottom: 1px solid #f0ede7;
+  align-items: center;
+}
+.phase-num {
+  width: 44px; height: 44px;
+  background: #0b5563;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 800;
+}
+.phase-v2.p2 .phase-num { background: #d97706; }
+.phase-v2.p3 .phase-num { background: #047857; }
+.phase-meta {}
+.phase-days {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.phase-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f1a2e;
+}
+.phase-end {
+  text-align: right;
+  padding-left: 16px;
+  border-left: 1px solid #e5e2dc;
+}
+.phase-end-num {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1a2e;
+}
+.phase-end-label {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+.phase-body { padding: 16px 20px; }
+.why-how-goal {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 14px;
+}
+.whg-card {
+  background: #fafaf8;
+  border: 1px solid #f0ede7;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.whg-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #6b7280;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.whg-text {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #1a2332;
+}
+.whg-text strong { color: #0b5563; }
+.whg-card ul {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12.5px;
+}
+.whg-card li { margin-bottom: 4px; line-height: 1.4; }
+
+/* PHASES (30/60/90) */
+.phases {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.phase {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 16px 16px 4px 16px;
+  position: relative;
+  overflow: hidden;
+}
+.phase::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #6b7280;
+}
+.phase.p1::before { background: #0b5563; }
+.phase.p2::before { background: #d97706; }
+.phase.p3::before { background: #047857; }
+.phase .days {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.phase .title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin-bottom: 8px;
+}
+.phase .outcome {
+  font-size: 12px;
+  font-style: italic;
+  color: #4b5563;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #e5e2dc;
+}
+.phase ul { margin: 0; padding-left: 16px; padding-bottom: 12px; }
+.phase li { font-size: 12.5px; margin-bottom: 5px; }
+.phase li strong { color: #0b5563; }
+
+/* HORIZON 2 — Beyond Day 90 */
+.horizon-2 {
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 20px 24px;
+  border-left: 5px solid #047857;
+}
+.h2-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #bbf7d0;
+}
+.h2-jump {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.h2-from {
+  font-size: 22px;
+  color: #6b7280;
+  font-weight: 600;
+  text-decoration: line-through;
+  text-decoration-color: #9ca3af;
+}
+.h2-arrow {
+  font-size: 24px;
+  color: #047857;
+  font-weight: 300;
+}
+.h2-to {
+  font-size: 38px;
+  font-weight: 800;
+  color: #047857;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.h2-meta-line {
+  font-size: 14px;
+  color: #064e3b;
+  margin-bottom: 4px;
+}
+.h2-meta-line strong { color: #047857; }
+.h2-sub {
+  font-size: 12px;
+  color: #4b5563;
+}
+.h2-products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.h2-product {
+  background: white;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.h2-p-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin-bottom: 4px;
+}
+.h2-p-stats {
+  font-size: 11.5px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+.h2-p-state {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+.h2-p-state.proven { background: #d1fae5; color: #065f46; }
+.h2-p-state.next { background: #fef3c7; color: #92400e; }
+.h2-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  font-size: 12.5px;
+  color: #1a2332;
+  line-height: 1.45;
+  padding-top: 14px;
+  border-top: 1px solid #bbf7d0;
+}
+.h2-foot strong { color: #047857; }
+
+/* ASKS */
+.asks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.ask-card {
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.ask-card.launchbay {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #2563eb;
+}
+.ask-card.crain {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-left: 4px solid #ea580c;
+}
+.ask-card.adops {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid #047857;
+}
+.ask-card h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 4px 0;
+  font-weight: 700;
+}
+.ask-card.launchbay h4 { color: #1e3a8a; }
+.ask-card.crain h4 { color: #9a3412; }
+.ask-card.adops h4 { color: #065f46; }
+.ask-card .who-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f1a2e;
+  margin-bottom: 8px;
+}
+.ask-card ul {
+  margin: 0;
+  padding-left: 16px;
+  list-style: none;
+}
+.ask-card li {
+  font-size: 12.5px;
+  margin-bottom: 5px;
+  padding-left: 14px;
+  position: relative;
+  color: #1a2332;
+}
+.ask-card li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+/* METRICS / PROGRESS BARS */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.metric-card {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.metric-card .label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.metric-card .progress-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f1a2e;
+  line-height: 1;
+}
+.metric-card .progress-num .target {
+  font-size: 14px;
+  color: #9ca3af;
+  font-weight: 500;
+}
+.bar {
+  height: 8px;
+  background: #f3f0e9;
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0b5563, #14b8a6);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.bar-fill.red { background: linear-gradient(90deg, #b91c1c, #ef4444); }
+.bar-fill.amber { background: linear-gradient(90deg, #d97706, #f59e0b); }
+
+/* Sequencing bar */
+.seq-bar {
+  display: grid;
+  grid-template-columns: 1fr 24px 1fr 24px 1fr;
+  gap: 6px;
+  margin-bottom: 14px;
+  align-items: stretch;
+}
+.seq-step {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border-top: 3px solid #6b7280;
+}
+.seq-step.active { border-top-color: #d97706; background: #fffbeb; }
+.seq-step.done { border-top-color: #047857; background: #f0fdf4; }
+.seq-when {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.seq-what {
+  font-size: 13px;
+  color: #1a2332;
+  line-height: 1.35;
+}
+.seq-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #cbd5e1;
+}
+
+/* BETA CLIENTS */
+.beta-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.beta-row-4 { grid-template-columns: repeat(4, 1fr); }
+.beta {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 8px;
+  padding: 12px 14px;
+  border-left: 3px solid #0b5563;
+}
+.beta .client {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin-bottom: 4px;
+}
+.beta .stats {
+  font-size: 12px;
+  color: #4b5563;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.beta .stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.beta .stats span strong { color: #0b5563; }
+
+/* Benefits */
+.benefits-intro {
+  background: #fafaf8;
+  border-left: 4px solid #0b5563;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #1a2332;
+}
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.benefit-card {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 18px 20px;
+  border-top: 4px solid #0b5563;
+}
+.benefit-num {
+  font-size: 36px;
+  font-weight: 800;
+  color: #0b5563;
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.benefit-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f1a2e;
+  margin-bottom: 10px;
+}
+.benefit-source {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-style: italic;
+  line-height: 1.4;
+  padding-top: 10px;
+  border-top: 1px dashed #e5e2dc;
+}
+.benefit-source a {
+  color: #0b5563;
+  text-decoration: none;
+  border-bottom: 1px dotted #0b5563;
+  font-style: normal;
+}
+.benefit-source a:hover { color: #d97706; border-bottom-color: #d97706; }
+
+/* Crain math callout */
+.crain-math {
+  background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%);
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 16px 0;
+}
+.cm-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #92400e;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.cm-grid {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.cm-stat {
+  background: white;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  flex: 1;
+  min-width: 130px;
+}
+.cm-stat.result {
+  background: #fef3c7;
+  border-color: #d97706;
+  border-width: 2px;
+}
+.cm-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: #92400e;
+  letter-spacing: -0.4px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.cm-stat.result .cm-num { color: #0b5563; font-size: 22px; }
+.cm-desc {
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.35;
+}
+.cm-x, .cm-eq {
+  font-size: 22px;
+  font-weight: 700;
+  color: #d97706;
+  flex-shrink: 0;
+}
+.cm-foot {
+  font-size: 12.5px;
+  color: #1a2332;
+  border-top: 1px dashed #fde68a;
+  padding-top: 12px;
+  line-height: 1.5;
+}
+.cm-foot strong { color: #92400e; }
+
+@media (max-width: 700px) {
+  .cm-grid { flex-direction: column; align-items: stretch; }
+  .cm-x, .cm-eq { text-align: center; }
+}
+.benefits-callout {
+  background: linear-gradient(135deg, #0f1a2e 0%, #0b5563 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+.bc-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: #93c5fd;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.bc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.bc-item {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.bc-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.bc-item strong { color: #fbbf24; }
+
+@media (max-width: 900px) {
+  .benefits-grid { grid-template-columns: 1fr 1fr; }
+  .bc-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .benefits-grid { grid-template-columns: 1fr; }
+}
+
+/* Grace + Michaela section */
+.gm-section {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 14px;
+}
+.gm-suggestions {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 12px;
+  padding: 18px 22px;
+  border-left: 5px solid #5b21b6;
+}
+.gm-block { margin-bottom: 18px; }
+.gm-block:last-child { margin-bottom: 0; }
+.gm-block-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #5b21b6;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.gm-block ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.gm-block li {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 5px;
+  color: #1a2332;
+}
+.gm-block li strong { color: #5b21b6; }
+.gm-notes {
+  background: #fefce8;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.gm-notes-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #fde68a;
+}
+.gm-notes-icon { font-size: 16px; }
+.gm-notes-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #92400e;
+}
+.gm-notes-saved {
+  font-size: 11px;
+  color: #b45309;
+  margin-left: auto;
+  font-style: italic;
+}
+.gm-notes textarea {
+  flex: 1;
+  min-height: 280px;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  resize: vertical;
+  background: white;
+  color: #1a2332;
+  outline: none;
+}
+.gm-notes textarea:focus {
+  border-color: #d97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+}
+.gm-note-inline {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #f3f0e9;
+  border-left: 3px solid #6b7280;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #4b5563;
+}
+.gm-note-inline strong { color: #0b5563; }
+
+/* Role-Based Training */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.role-card {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 18px 20px;
+  border-top: 5px solid #6b7280;
+}
+.role-card.builder { border-top-color: #5b21b6; }
+.role-card.daily { border-top-color: #2563eb; }
+.role-card.manager { border-top-color: #047857; }
+.role-tag {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.role-card.builder .role-tag { color: #5b21b6; }
+.role-card.daily .role-tag { color: #2563eb; }
+.role-card.manager .role-tag { color: #047857; }
+.role-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin-bottom: 8px;
+}
+.role-desc {
+  font-size: 13px;
+  color: #1a2332;
+  line-height: 1.45;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #e5e2dc;
+}
+.role-who, .role-training {
+  font-size: 12px;
+  color: #4b5563;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.role-who strong, .role-training strong {
+  color: #0f1a2e;
+  display: block;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 3px;
+}
+.role-foot {
+  background: #fafaf8;
+  border-left: 4px solid #5b21b6;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #1a2332;
+}
+.role-foot strong { color: #5b21b6; }
+
+@media (max-width: 900px) {
+  .role-grid { grid-template-columns: 1fr; }
+}
+
+/* PM Workload Shift */
+.workload-frame {
+  background: linear-gradient(135deg, #0f1a2e 0%, #0b5563 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 16px;
+}
+.workload-frame strong { color: #fbbf24; }
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  gap: 14px;
+  align-items: stretch;
+  margin-bottom: 18px;
+}
+.ba-col {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.ba-col.current { border-top: 4px solid #b91c1c; }
+.ba-col.future { border-top: 4px solid #047857; }
+.ba-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.ba-col.current .ba-label { color: #b91c1c; }
+.ba-col.future .ba-label { color: #047857; }
+.ba-col ul { margin: 0 0 12px 0; padding-left: 18px; }
+.ba-col li {
+  font-size: 12.5px;
+  margin-bottom: 5px;
+  line-height: 1.4;
+  color: #1a2332;
+}
+.ba-col.future li strong { color: #047857; font-size: 14px; }
+.ba-meta {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-style: italic;
+  padding-top: 8px;
+  border-top: 1px dashed #e5e2dc;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+.ba-meta:first-of-type { border-top: none; padding-top: 0; }
+.ba-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #d97706;
+  font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .gm-section { grid-template-columns: 1fr; }
+  .gm-notes textarea { min-height: 200px; }
+}
+
+/* Diagram cards */
+.diagram-card {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 12px;
+  padding: 24px;
+}
+.diagram-card pre.mermaid {
+  background: transparent;
+  border: none;
+  text-align: center;
+  margin: 0 0 14px 0;
+  overflow-x: auto;
+}
+.diagram-note {
+  background: #fafaf8;
+  border-left: 3px solid #0b5563;
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #1a2332;
+}
+.diagram-note strong { color: #0b5563; }
+
+/* PM Breakdown */
+.pm-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.pm-card {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  border-top: 4px solid #0b5563;
+}
+.pm-head {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0ede7;
+}
+.pm-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f1a2e;
+}
+.pm-brand {
+  font-size: 11.5px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.pm-portfolio {
+  font-size: 12.5px;
+  margin-bottom: 10px;
+}
+.pm-line {
+  padding: 3px 0;
+  color: #1a2332;
+}
+.pm-line strong { color: #0b5563; }
+
+/* PM state rows */
+.pm-state {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.ps-row {
+  font-size: 11.5px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  line-height: 1.35;
+  color: #1a2332;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ps-row.in-lb { background: #ecfdf5; border-left: 3px solid #047857; }
+.ps-row.off-lb { background: #fef2f2; border-left: 3px solid #b91c1c; }
+.ps-row.future { background: #eff6ff; border-left: 3px solid #2563eb; }
+.ps-tag {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: 700;
+  color: #6b7280;
+}
+.ps-row.in-lb .ps-tag { color: #047857; }
+.ps-row.off-lb .ps-tag { color: #b91c1c; }
+.ps-row.future .ps-tag { color: #2563eb; }
+.pm-backup {
+  font-size: 12px;
+  color: #4b5563;
+  padding-top: 8px;
+  border-top: 1px dashed #e5e2dc;
+}
+.pm-backup strong { color: #1a2332; }
+.pm-risk {
+  display: block;
+  margin-top: 4px;
+  color: #b91c1c;
+  font-weight: 600;
+  font-size: 11.5px;
+}
+
+/* Make LB Stick */
+.stick-intro {
+  background: #fafaf8;
+  border-left: 4px solid #d97706;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #1a2332;
+}
+.stick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.stick-card {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 18px 20px;
+  border-top: 5px solid #0b5563;
+  position: relative;
+}
+.stick-card.layer-1 { border-top-color: #2563eb; }
+.stick-card.layer-2 { border-top-color: #d97706; }
+.stick-card.layer-3 { border-top-color: #5b21b6; }
+.stick-card.layer-4 { border-top-color: #047857; }
+.stick-icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+.stick-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #6b7280;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.stick-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin-bottom: 10px;
+}
+.stick-body ul {
+  margin: 0 0 12px 0;
+  padding-left: 18px;
+}
+.stick-body li {
+  font-size: 12.5px;
+  line-height: 1.45;
+  margin-bottom: 5px;
+  color: #1a2332;
+}
+.stick-body li strong { color: #0b5563; }
+.stick-owner {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-style: italic;
+  padding-top: 8px;
+  border-top: 1px dashed #e5e2dc;
+}
+
+@media (max-width: 900px) {
+  .pm-grid, .stick-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .pm-grid, .stick-grid { grid-template-columns: 1fr; }
+}
+
+/* RISKS — flat list */
+.risks-flat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.risk-item-lg {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 14px 18px;
+  position: relative;
+  padding-left: 22px;
+  border-left: 5px solid #9ca3af;
+}
+.risk-item-lg b {
+  font-size: 14px;
+  color: #0f1a2e;
+  display: block;
+  margin-bottom: 4px;
+}
+.risk-item-lg .why {
+  font-size: 12.5px;
+  color: #4b5563;
+  line-height: 1.45;
+}
+.risk-tag {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+.risk-tag.crit { background: #fee2e2; color: #991b1b; }
+.risk-tag.high { background: #fef3c7; color: #92400e; }
+.risk-tag.med  { background: #d1fae5; color: #065f46; }
+.risk-item-lg:has(.risk-tag.crit) { border-left-color: #b91c1c; }
+.risk-item-lg:has(.risk-tag.high) { border-left-color: #d97706; }
+.risk-item-lg:has(.risk-tag.med)  { border-left-color: #047857; }
+
+/* RISKS (old) */
+.risks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.risk-col h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0 0 8px 0;
+  font-weight: 700;
+}
+.risk-col.crit h4 { color: #b91c1c; }
+.risk-col.high h4 { color: #d97706; }
+.risk-col.med h4 { color: #047857; }
+.risk-list { display: flex; flex-direction: column; gap: 6px; }
+.risk-item {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  border-left: 3px solid #9ca3af;
+}
+.risk-col.crit .risk-item { border-left-color: #b91c1c; }
+.risk-col.high .risk-item { border-left-color: #d97706; }
+.risk-col.med .risk-item { border-left-color: #047857; }
+.risk-item b { color: #0f1a2e; }
+.risk-item .why {
+  font-size: 11.5px;
+  color: #6b7280;
+  margin-top: 3px;
+  font-style: italic;
+}
+
+/* DETAILS / EXPANDABLES */
+.expand-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+details.expand {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 10px;
+  padding: 0;
+  overflow: hidden;
+}
+details.expand summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+details.expand summary::-webkit-details-marker { display: none; }
+details.expand summary .title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f1a2e;
+}
+details.expand summary .arrow {
+  font-size: 14px;
+  color: #9ca3af;
+  transition: transform 0.2s;
+}
+details.expand[open] summary {
+  border-bottom: 1px solid #f0ede7;
+}
+details.expand[open] summary .arrow {
+  transform: rotate(90deg);
+}
+details.expand .body {
+  padding: 14px 18px 16px;
+}
+details.expand .body p { font-size: 13px; margin: 0 0 8px 0; }
+details.expand .body ul { margin: 0; padding-left: 18px; }
+details.expand .body li { font-size: 13px; margin-bottom: 5px; }
+
+/* Tables in expandables */
+table.tight {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+table.tight th {
+  text-align: left;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #6b7280;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e2dc;
+  background: #f9f7f2;
+}
+table.tight td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #f0ede7;
+}
+table.tight tr:last-child td { border-bottom: none; }
+.pill {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.pill.green { background: #d1fae5; color: #065f46; }
+.pill.amber { background: #fef3c7; color: #92400e; }
+.pill.red   { background: #fee2e2; color: #991b1b; }
+.pill.blue  { background: #dbeafe; color: #1e3a8a; }
+.pill.purple { background: #ede9fe; color: #5b21b6; }
+.pill.gray  { background: #f3f4f6; color: #4b5563; }
+
+/* Charts */
+.chart-wrap {
+  height: 240px;
+  position: relative;
+}
+
+/* Weekly dashboard */
+.weekly {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.weekly .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0ede7;
+}
+.weekly h3 {
+  font-size: 13px;
+  margin: 0;
+  font-weight: 700;
+  color: #0f1a2e;
+}
+.weekly .week { font-size: 11.5px; color: #6b7280; }
+
+/* Scope Decision callout */
+.scope-decision {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid #d97706;
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin-top: 22px;
+  position: relative;
+}
+.sd-header { margin-bottom: 16px; }
+.sd-tag {
+  display: inline-block;
+  background: #d97706;
+  color: white;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.sd-header h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.3px;
+}
+.sd-header p {
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0;
+}
+.sd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.sd-option {
+  background: white;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.sd-option.current { border-top: 4px solid #6b7280; }
+.sd-option.proposed { border-top: 4px solid #047857; box-shadow: 0 2px 8px rgba(4, 120, 87, 0.1); }
+.sd-opt-tag {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.sd-option.proposed .sd-opt-tag { color: #047857; }
+.sd-opt-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f1a2e;
+  margin-bottom: 10px;
+}
+.sd-option ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.sd-option li {
+  font-size: 12.5px;
+  margin-bottom: 5px;
+  line-height: 1.4;
+  color: #1a2332;
+}
+.sd-option.proposed li strong { color: #047857; }
+.sd-option.current li strong { color: #0b5563; }
+.sd-foot {
+  background: white;
+  border: 1px dashed #fde68a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #1a2332;
+}
+.sd-foot strong { color: #92400e; }
+
+@media (max-width: 700px) {
+  .sd-grid { grid-template-columns: 1fr; }
+}
+
+/* This Week — collapsible at top */
+.this-week-collapse {
+  background: #fef9e7;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+.this-week-collapse summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+.this-week-collapse summary::-webkit-details-marker { display: none; }
+.tw-icon { font-size: 16px; }
+.tw-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #92400e;
+}
+.tw-meta {
+  font-size: 12px;
+  color: #b45309;
+  margin-left: auto;
+  margin-right: 10px;
+}
+.tw-arrow {
+  font-size: 16px;
+  color: #92400e;
+  transition: transform 0.2s;
+  font-weight: 700;
+}
+.this-week-collapse[open] .tw-arrow { transform: rotate(90deg); }
+.this-week-collapse[open] summary { border-bottom: 1px solid #fde68a; }
+.this-week-collapse .snapshot-body {
+  padding: 0;
+  background: white;
+}
+
+/* This Week Snapshot (old, kept for compatibility) */
+.snapshot {
+  background: white;
+  border: 1px solid #e5e2dc;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.snapshot-head {
+  background: linear-gradient(135deg, #f9f7f2 0%, #f0ede7 100%);
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e2dc;
+}
+.snapshot-head .week-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f1a2e;
+  line-height: 1;
+}
+.snapshot-head .week-date {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+.countdown {
+  text-align: right;
+}
+.countdown-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #d97706;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+.countdown-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #92400e;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.snapshot-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+}
+.snap-col {
+  padding: 16px 20px;
+  border-right: 1px solid #f0ede7;
+}
+.snap-col:last-child { border-right: none; }
+.snap-col h5 {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #6b7280;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+.snap-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.snap-col li {
+  font-size: 12.5px;
+  padding: 5px 0 5px 18px;
+  position: relative;
+  color: #1a2332;
+  line-height: 1.4;
+}
+.snap-col li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #047857;
+  font-weight: 700;
+}
+.snap-col:nth-child(2) li::before {
+  content: '→';
+  color: #d97706;
+}
+.snap-col:nth-child(3) li::before {
+  content: '○';
+  color: #9ca3af;
+  font-weight: 400;
+}
+.snap-col li.risk-pin::before {
+  content: '⚠';
+  color: #b91c1c;
+}
+
+/* Footer */
+.foot {
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: center;
+  margin-top: 28px;
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .hero-stats, .arc, .phases, .asks, .metrics-grid, .beta-row, .risks, .expand-row, .action-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .arc-arrow { display: none; }
+  .arc { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .hero-stats, .arc, .phases, .asks, .metrics-grid, .beta-row, .risks, .expand-row, .action-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body { background: white; font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .container { padding: 12px; max-width: none; }
+
+  /* Force-expand ALL collapsible sections for the printed/PDF version */
+  details, details.sect, details.expand, details.this-week-collapse { break-inside: avoid; }
+  details > summary, details.sect > summary, details.expand > summary { cursor: default; pointer-events: none; }
+  details > .sect-body, details > .body, details > .snapshot-body { display: block !important; }
+  details:not([open]) > *:not(summary) { display: block !important; }
+  .sect-toggle, .tw-arrow, .expand .arrow { display: none !important; }
+
+  /* Section headers stay distinguishable in print */
+  details.sect > summary { background: #f3f0e9 !important; border-top: 3px solid #0b5563 !important; }
+
+  /* Don't print the notes textarea editing affordance */
+  .gm-notes textarea { border: 1px solid #ccc !important; min-height: 100px; }
+
+  /* Avoid breaks inside cards */
+  .arc-card, .pm-card, .stick-card, .benefit-card, .ask-card, .h2-product,
+  .role-card, .phase-v2, .ba-col, .risk-item-lg, .diagram-card, .crain-math,
+  .gm-suggestions, .gm-notes { break-inside: avoid; }
+
+  /* Better hero print color */
+  .hero { background: #0f1a2e !important; color: white !important; }
+  .ha-card { background: rgba(255,255,255,0.1) !important; }
+
+  /* Hide hover-only / interactive cues */
+  details.sect > summary:hover { background: #f3f0e9 !important; }
+  .sect-body { padding: 16px !important; }
+
+  /* Mermaid diagrams print well */
+  pre.mermaid { background: white !important; }
+  .diagram-card { background: white !important; border: 1px solid #ccc !important; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Crain · Advertising Solutions · Launchbay Plan · 2026</div>
+    <h1>Move $3M of client-written revenue to Launchbay in 90 days.</h1>
+    <p class="sub">All CW work · One portal per client · AdOps owns operations by Day 90 · Aggressive but doable with discipline</p>
+
+    <div class="hero-arc">
+      <div class="ha-card now">
+        <div class="ha-tag">Today · May 14</div>
+        <div class="ha-big">~$50K</div>
+        <div class="ha-label">live in LB</div>
+        <div class="ha-line">It works.</div>
+        <div class="ha-stats">5 projects · 1 portal · <a href="https://app.launchbay.com/team/12350/people/89969" target="_blank" class="ha-link">Comcast ↗</a></div>
+      </div>
+      <div class="ha-track"><div class="ha-fill" style="width: 2%"></div></div>
+      <div class="ha-card mid">
+        <div class="ha-tag">Day 60 · Jul 24</div>
+        <div class="ha-big">~$1.8M</div>
+        <div class="ha-label">~20 portals live · scale phase</div>
+        <div class="ha-line">Halfway there.</div>
+        <div class="ha-stats">~half of CW scope · AdOps shadowing</div>
+      </div>
+      <div class="ha-track"><div class="ha-fill" style="width: 0%"></div></div>
+      <div class="ha-card end">
+        <div class="ha-tag">Day 90 · Aug 24</div>
+        <div class="ha-big">$3M+</div>
+        <div class="ha-label">all Client Written projects live</div>
+        <div class="ha-line">AdOps OWNS.</div>
+        <div class="ha-stats">~339 projects · 30+ portals · ~58 clients</div>
+      </div>
+    </div>
+
+    <div class="hero-chips">
+      <span>339 projects in scope</span>
+      <span class="dot">·</span>
+      <span>~58 unique clients</span>
+      <span class="dot">·</span>
+      <span>9 brands</span>
+      <span class="dot">·</span>
+      <span>Kickoff: Tue May 26</span>
+    </div>
+
+    <div class="hero-links">
+      <a href="https://app.launchbay.com/team/12350/people/89969" target="_blank">↗ Comcast portal (live in LB)</a>
+      <a href="https://app.smartsheet.com/reports/M3JhpHcX3Fjr76G2VGf8XR27XVjGqXRchww8hVg1?view=grid" target="_blank">↗ Digital article report</a>
+      <a href="https://app.smartsheet.com/reports/QQ27GHWH8wwwxrwQqwGX758GmWJgVcFp39qmpF71?view=grid" target="_blank">↗ Full CW report</a>
+    </div>
+  </div>
+
+  <!-- SCOPE DECISION CALLOUT -->
+  <div class="scope-decision">
+    <div class="sd-header">
+      <span class="sd-tag">Decision Pending · Discussion w/ Kristin</span>
+      <h3>Scope Question: Include Modern Healthcare in Day 90, or sequence as Wave 2?</h3>
+      <p>Kristin raised whether a smaller scope without MH could be more valuable. Both paths shown side-by-side.</p>
+    </div>
+    <div class="sd-grid">
+      <div class="sd-option current">
+        <div class="sd-opt-tag">Option A · Current Plan</div>
+        <div class="sd-opt-title">Full $3M+ scope</div>
+        <ul>
+          <li><strong>9 brands · 339 projects · ~$3M+</strong></li>
+          <li>Includes Modern Healthcare (17 digital articles + other CW)</li>
+          <li>Sammy interim coverage in place (Colin/Alison/Grace)</li>
+          <li><strong>3 critical risks:</strong> Sammy gap · KT confirmation · workspace cleanup</li>
+          <li>Aggressive but possible with bulk CSV upload</li>
+        </ul>
+      </div>
+      <div class="sd-option proposed">
+        <div class="sd-opt-tag">Option B · MH as Wave 2</div>
+        <div class="sd-opt-title">~$2.5M scope · MH later</div>
+        <ul>
+          <li><strong>8 brands · ~305 projects · ~$2.5M</strong></li>
+          <li>MH descoped from Day 90 → joins LB in Q3/Q4 once backfill is hired &amp; ramped</li>
+          <li>Cohort unaffected (MAHP, Wintrust, Solera — none MH)</li>
+          <li><strong>2 critical risks remaining:</strong> KT confirmation · workspace cleanup</li>
+          <li>Confident target · cleaner execution story for AdOps handoff</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sd-foot">
+      <strong>Day 90 narrow digital-article scope shifts:</strong> $570K → ~$485K · 61 projects → ~44 · 10 portals → 9 portals (drop Magical + other MH portals from expansion).<br>
+      <strong>Recommendation:</strong> Option B. Removes the largest staffing risk, lets MH join as a controlled Q3/Q4 rollout instead of forced Q2. Stronger story than missing $3M.
+    </div>
+  </div>
+
+  <!-- THIS WEEK (collapsible at top) -->
+  <details class="this-week-collapse">
+    <summary>
+      <span class="tw-icon">📅</span>
+      <span class="tw-title">This Week · Week 0 · Pre-Kickoff</span>
+      <span class="tw-meta">12 days to kickoff · Michaela call complete ✓ · 3 blockers · Click to expand</span>
+      <span class="tw-arrow">›</span>
+    </summary>
+    <div class="snapshot-body">
+      <div class="snap-col">
+        <h5>Wins this week</h5>
+        <ul>
+          <li>Michaela strategy call complete ✓</li>
+          <li><strong>Big find: bulk CSV upload available</strong> — pre-creates portals + auto-stages CRM contacts; activation is a separate step</li>
+          <li>Role-Based Training framework agreed (Builders / Daily Users / Managers)</li>
+          <li>Zapier path confirmed for ongoing SS → LB automation</li>
+          <li>2 sessions w/ Michaela scheduled next week (Tue + Fri)</li>
+          <li>AN + P&amp;I tagged into scope; full $3M scope mapped</li>
+          <li>Sammy interim coverage plan (Colin/Alison/Grace) in place</li>
+        </ul>
+      </div>
+      <div class="snap-col">
+        <h5>Focus next 12 days (pre-kickoff)</h5>
+        <ul>
+          <li>Tue session w/ Michaela: PPCW walkthrough</li>
+          <li>Fri session w/ Michaela: client role-play</li>
+          <li>Audit LB user roles (Manager vs Admin) · fix Slack integration</li>
+          <li>Email Evan re: pricing + adding LB seats</li>
+          <li>Email Michaela: PPCW workflow with roles + post-project survey questions</li>
+          <li>KT meeting confirmed &amp; held</li>
+          <li>Confirm Natalie as deputy / superuser-in-training</li>
+        </ul>
+      </div>
+      <div class="snap-col">
+        <h5>Blockers</h5>
+        <ul>
+          <li class="risk-pin">In-person Detroit training pending Michaela's manager approval</li>
+          <li class="risk-pin">Sammy backfill not yet posted</li>
+          <li class="risk-pin">KT commitment unconfirmed</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <!-- WHY THIS BEATS EMAIL (MOVED UP — value prop first) -->
+  <details class="sect" open>
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Why a Client Portal Beats Email + Intake Forms</h2>
+        <div class="h-aside">Industry benchmarks · Launchbay case data</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-num">40%+</div>
+      <div class="benefit-label">faster client onboarding</div>
+      <div class="benefit-source"><a href="https://launchbay.com/digital-marketing-agencies" target="_blank">Launchbay customer data ↗</a></div>
+    </div>
+    <div class="benefit-card" style="border-top-color: #d97706;">
+      <div class="benefit-num">~2 hrs</div>
+      <div class="benefit-label">saved per PM, per day</div>
+      <div class="benefit-source"><a href="https://www.moxo.com/customers/1852-media" target="_blank">1852 Media case study (Moxo) ↗</a> · <a href="https://zapier.com/blog/state-of-business-automation/" target="_blank">Zapier industry benchmark ↗</a></div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-num">50%</div>
+      <div class="benefit-label">fewer campaign delays</div>
+      <div class="benefit-source"><a href="https://www.knack.com/blog/client-portals-for-marketing-agencies/" target="_blank">Webware agency case ↗</a></div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-num">+30%</div>
+      <div class="benefit-label">more clients per PM</div>
+      <div class="benefit-source"><a href="https://www.moxo.com/customers/1852-media" target="_blank">1852 Media case study (Moxo) ↗</a></div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-num">29.7%</div>
+      <div class="benefit-label">more efficient than email</div>
+      <div class="benefit-source"><a href="https://productive.io/blog/project-management-software-with-a-client-portal/" target="_blank">Productive.io benchmark ↗</a> · vs. 55% still on email</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-num">+14.7%</div>
+      <div class="benefit-label">revenue lift</div>
+      <div class="benefit-source"><a href="https://www.moxo.com/customers/1852-media" target="_blank">1852 Media case study (Moxo) ↗</a></div>
+    </div>
+  </div>
+
+  <div class="crain-math">
+    <div class="cm-label">The Crain math · what 2 hrs/day really means</div>
+    <div class="cm-grid">
+      <div class="cm-stat">
+        <div class="cm-num">6 PMs</div>
+        <div class="cm-desc">on the rollout team</div>
+      </div>
+      <div class="cm-x">×</div>
+      <div class="cm-stat">
+        <div class="cm-num">2 hrs/day</div>
+        <div class="cm-desc">saved per PM (1852 Media + Zapier benchmarks)</div>
+      </div>
+      <div class="cm-x">×</div>
+      <div class="cm-stat">
+        <div class="cm-num">~250</div>
+        <div class="cm-desc">working days / year</div>
+      </div>
+      <div class="cm-eq">=</div>
+      <div class="cm-stat result">
+        <div class="cm-num">~3,000 hrs</div>
+        <div class="cm-desc">PM time recovered / year (~1.5 FTE equivalent)</div>
+      </div>
+    </div>
+    <div class="cm-foot">At a fully-loaded PM cost of ~$50–75/hr, that's <strong>$150K–$225K/year of recovered capacity</strong> — funding scale, not headcount.</div>
+  </div>
+  <div class="benefits-callout">
+    <div class="bc-label">What this means for Crain</div>
+    <div class="bc-grid">
+      <div class="bc-item">
+        <div class="bc-icon">🔄</div>
+        <div><strong>One portal per client, across brands.</strong> Wintrust = 1 workspace for 9 projects across CHI+DET+GR.</div>
+      </div>
+      <div class="bc-item">
+        <div class="bc-icon">📈</div>
+        <div><strong>Sales gets renewal data on demand.</strong> One click instead of a week of digging.</div>
+      </div>
+      <div class="bc-item">
+        <div class="bc-icon">🤝</div>
+        <div><strong>AdOps inherits a clean system,</strong> not tribal knowledge in Grace's head.</div>
+      </div>
+      <div class="bc-item">
+        <div class="bc-icon">👤</div>
+        <div><strong>Clients get a professional experience</strong> with clear next steps, no email anxiety.</div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- WORKFLOW DIAGRAM -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>How the Work Flows</h2>
+        <div class="h-aside">IO → Launchbay portal → status syncs back to Smartsheet</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="diagram-card">
+    <div class="static-diagram"><svg viewBox="0 0 1100 360" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <!-- Row 1: Smartsheet backlog feeds LB portals via Bulk CSV -->
+  <rect x="40" y="20" width="200" height="58" rx="8" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+  <text x="140" y="45" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#0f1a2e">Smartsheet CW backlog</text>
+  <text x="140" y="63" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#4b5563">339 projects</text>
+
+  <line x1="240" y1="49" x2="540" y2="155" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="370" y="85" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11.5" fill="#047857" font-weight="700">Bulk CSV upload</text>
+  <text x="370" y="100" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" fill="#6b7280">(one-time backfill)</text>
+
+  <!-- Row 2: IO → SF → SS intake → Zapier → LB portals -->
+  <rect x="40" y="140" width="100" height="48" rx="8" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="90" y="170" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#0f1a2e">IO submitted</text>
+
+  <line x1="140" y1="164" x2="180" y2="164" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="180" y="140" width="100" height="48" rx="8" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="230" y="170" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" fill="#0f1a2e">Salesforce</text>
+
+  <line x1="280" y1="164" x2="320" y2="164" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="320" y="140" width="160" height="48" rx="8" fill="#fef3c7" stroke="#92400e" stroke-width="2"/>
+  <text x="400" y="162" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12" font-weight="600" fill="#0f1a2e">Smartsheet intake</text>
+  <text x="400" y="178" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#4b5563">+ approval</text>
+
+  <line x1="480" y1="164" x2="540" y2="164" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="510" y="155" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#047857" font-weight="700">Zapier</text>
+  <text x="510" y="178" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="9" fill="#6b7280">(ongoing)</text>
+
+  <rect x="540" y="135" width="170" height="58" rx="8" fill="#d1fae5" stroke="#047857" stroke-width="3"/>
+  <text x="625" y="158" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#0f1a2e">LB portals + CRM</text>
+  <text x="625" y="174" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#0f1a2e">contacts pre-created</text>
+
+  <line x1="710" y1="164" x2="755" y2="164" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="755" y="135" width="150" height="58" rx="8" fill="#d1fae5" stroke="#047857" stroke-width="3"/>
+  <text x="830" y="158" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#0f1a2e">Send portal invite</text>
+  <text x="830" y="174" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" fill="#4b5563">gated by training</text>
+
+  <!-- Row 3: Send invite → Work in LB → Status → Reporting -->
+  <line x1="830" y1="193" x2="200" y2="240" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="200" y="245" width="180" height="58" rx="8" fill="#d1fae5" stroke="#047857" stroke-width="3"/>
+  <text x="290" y="268" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#0f1a2e">Work in Launchbay</text>
+  <text x="290" y="284" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" fill="#4b5563">8-phase workflow</text>
+
+  <line x1="380" y1="274" x2="430" y2="274" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="430" y="245" width="180" height="58" rx="8" fill="#fef3c7" stroke="#92400e" stroke-width="2"/>
+  <text x="520" y="268" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#0f1a2e">Status syncs to SS</text>
+  <text x="520" y="284" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" fill="#4b5563">via Zapier</text>
+
+  <line x1="610" y1="274" x2="660" y2="274" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="660" y="245" width="180" height="58" rx="8" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="750" y="268" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="12.5" font-weight="700" fill="#0f1a2e">Leadership reporting</text>
+  <text x="750" y="284" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10.5" fill="#4b5563">renewals · revenue</text>
+</svg></div>
+    <div class="diagram-note">
+      <strong>Two paths to LB:</strong> (1) <strong>Bulk CSV upload</strong> pre-creates portals + CRM contacts for the existing 339-project backlog. (2) <strong>Zapier</strong> handles ongoing new IOs from Smartsheet. Either way, portals are <strong>created but inactive</strong> until a trained champion clicks "send invite." Status syncs back to Smartsheet so leadership reporting stays unchanged.
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- ORG CHART -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Who Makes It Happen</h2>
+        <div class="h-aside">How Crain, AdOps, and Launchbay connect</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="diagram-card">
+    <div class="static-diagram"><svg viewBox="0 0 1100 540" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <!-- Top: Michaela (left), Kristin (center), KT (right) -->
+  <rect x="60" y="20" width="220" height="56" rx="8" fill="#ede9fe" stroke="#5b21b6" stroke-width="3"/>
+  <text x="170" y="45" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#0f1a2e">Michaela Jarvis</text>
+  <text x="170" y="63" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#5b21b6">Launchbay CS</text>
+
+  <rect x="430" y="20" width="220" height="56" rx="8" fill="#fef3c7" stroke="#92400e" stroke-width="2"/>
+  <text x="540" y="45" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#0f1a2e">Kristin Bull</text>
+  <text x="540" y="63" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#92400e">Sponsor</text>
+
+  <rect x="820" y="20" width="220" height="56" rx="8" fill="#d1fae5" stroke="#047857" stroke-width="2"/>
+  <text x="930" y="45" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#0f1a2e">Kristen Thornton</text>
+  <text x="930" y="63" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#047857">AdOps · EOY Owner</text>
+
+  <!-- Lines from Michaela & Kristin to Grace -->
+  <line x1="170" y1="76" x2="490" y2="135" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="540" y1="76" x2="540" y2="135" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="930" y1="76" x2="930" y2="135" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- Mid: Grace (center) -->
+  <rect x="430" y="135" width="220" height="60" rx="8" fill="#dbeafe" stroke="#1e3a8a" stroke-width="3"/>
+  <text x="540" y="162" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="14" font-weight="700" fill="#0f1a2e">Grace Garrett</text>
+  <text x="540" y="180" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#1e3a8a">Lead → Superuser by Day 90</text>
+
+  <!-- AOD on the right -->
+  <rect x="820" y="135" width="220" height="56" rx="8" fill="#d1fae5" stroke="#047857" stroke-width="2"/>
+  <text x="930" y="160" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#0f1a2e">KT Delegate</text>
+  <text x="930" y="178" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#047857">Embedded Shadow</text>
+
+  <!-- Grace → Natalie -->
+  <line x1="540" y1="195" x2="540" y2="240" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- Natalie -->
+  <rect x="430" y="240" width="220" height="58" rx="8" fill="#dbeafe" stroke="#1e3a8a" stroke-width="2"/>
+  <text x="540" y="265" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" fill="#0f1a2e">Natalie Bonadeo</text>
+  <text x="540" y="283" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" fill="#1e3a8a">Deputy / Superuser-in-training</text>
+
+  <!-- Natalie → brand teams -->
+  <line x1="540" y1="298" x2="540" y2="340" stroke="#374151" stroke-width="2"/>
+
+  <!-- 5 brand teams in a row -->
+  <line x1="120" y1="340" x2="960" y2="340" stroke="#374151" stroke-width="2"/>
+  <line x1="120" y1="340" x2="120" y2="370" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="330" y1="340" x2="330" y2="370" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="540" y1="340" x2="540" y2="370" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="750" y1="340" x2="750" y2="370" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <line x1="960" y1="340" x2="960" y2="370" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- Brand boxes -->
+  <rect x="40" y="370" width="160" height="50" rx="6" fill="white" stroke="#0b5563" stroke-width="1.5"/>
+  <text x="120" y="390" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f1a2e">City Brands</text>
+  <text x="120" y="406" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#4b5563">Natalie + Brittany</text>
+
+  <rect x="250" y="370" width="160" height="50" rx="6" fill="white" stroke="#0b5563" stroke-width="1.5"/>
+  <text x="330" y="390" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f1a2e">Ad Age</text>
+  <text x="330" y="406" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#4b5563">Shelly + Sophia</text>
+
+  <rect x="460" y="370" width="160" height="50" rx="6" fill="white" stroke="#0b5563" stroke-width="1.5"/>
+  <text x="540" y="390" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f1a2e">Auto News</text>
+  <text x="540" y="406" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#4b5563">Veronica + Jessica</text>
+
+  <rect x="670" y="370" width="160" height="50" rx="6" fill="white" stroke="#0b5563" stroke-width="1.5"/>
+  <text x="750" y="390" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f1a2e">Modern Healthcare</text>
+  <text x="750" y="406" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#4b5563">??? + Shannon</text>
+
+  <rect x="880" y="370" width="160" height="50" rx="6" fill="white" stroke="#0b5563" stroke-width="1.5"/>
+  <text x="960" y="390" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f1a2e">Hart Energy</text>
+  <text x="960" y="406" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="10" fill="#4b5563">Jennifer</text>
+
+  <!-- AOD → downstream teams -->
+  <line x1="930" y1="191" x2="930" y2="450" stroke="#374151" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <!-- Michaela dotted lines to brand teams (available to all) -->
+  <path d="M 170 76 Q 100 250 120 370" fill="none" stroke="#5b21b6" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.5"/>
+  <path d="M 170 76 Q 200 250 330 370" fill="none" stroke="#5b21b6" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.5"/>
+  <path d="M 170 76 Q 350 250 540 370" fill="none" stroke="#5b21b6" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.5"/>
+
+  <!-- Downstream teams -->
+  <rect x="820" y="450" width="220" height="40" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+  <text x="930" y="475" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#0f1a2e">Design Hub · AdOps Banner · Marketing/Social</text>
+
+  <!-- Legend -->
+  <text x="60" y="510" font-family="-apple-system, sans-serif" font-size="10" fill="#5b21b6" font-style="italic">- - -  Michaela (dotted) is available to every brand champion, not just Grace.</text>
+</svg></div>
+    <div class="diagram-note">
+      <strong>Michaela sits above Grace</strong> as the vendor relationship — Grace goes up to her. <strong>Dotted lines</strong> show Michaela is available to every brand champion too (not just Grace). <strong>Natalie sits directly below Grace</strong> as deputy / superuser-in-training, with all brand teams flowing through her as she ramps up. AdOps inherits operations + runs downstream handoffs.
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- GRACE + MICHAELA NEXT STEPS -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Grace + Michaela · Immediate Next Steps</h2>
+        <div class="h-aside">How we partner · weekly cadence + first 30 days</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="gm-section">
+    <div class="gm-suggestions">
+      <div class="gm-block">
+        <div class="gm-block-label">Cadence</div>
+        <ul>
+          <li><strong>Next week:</strong> Tue session (PPCW walkthrough) + Fri session (client role-play) — confirmed on May 14 call</li>
+          <li><strong>Weekly 30-min sync</strong> — Grace + Michaela through rollout · then monthly post-Day 90</li>
+          <li><strong>Trailblazers Slack channel</strong> — Michaela to be added, async questions welcome</li>
+        </ul>
+      </div>
+      <div class="gm-block">
+        <div class="gm-block-label">First 30 days · together (May 26 → Jun 25)</div>
+        <ul>
+          <li><strong>Pre-kickoff (now → May 25):</strong> Workspace cleanup · audit user roles · fix Slack integration · draft V1 master template</li>
+          <li><strong>Week 1 (May 26–Jun 1):</strong> Lock V1 template · <strong>CSV bulk upload</strong> existing backlog (creates inactive portals + CRM contacts) · build MAHP portal as the reference</li>
+          <li><strong>Week 2 (Jun 2–7):</strong> Refine Wintrust + Solera portals · prep Detroit materials</li>
+          <li><strong>Week 2 (Jun 8–10):</strong> <strong>Detroit cohort</strong> — Michaela co-fac + office day</li>
+          <li><strong>Weeks 3–4 (Jun 11–25):</strong> Champions hit "send invite" on their trained portals · first projects flowing · begin Phase 2 prep (white paper template)</li>
+        </ul>
+      </div>
+      <div class="gm-block">
+        <div class="gm-block-label">Bigger asks of Michaela</div>
+        <ul>
+          <li><strong>Add Michaela to the Trailblazers Slack channel</strong> for the rollout period — async help, faster turnaround</li>
+          <li><strong>On-site at the Detroit office</strong> for 1 full day of training (if Crain-funded)</li>
+          <li><strong>Co-facilitate the Detroit cohort</strong> Jun 8–10</li>
+          <li><strong>Native NPS / client survey</strong> at project close</li>
+          <li><strong>Pricing model</strong> as portal count scales 10 → 30+ → 100+</li>
+        </ul>
+        <div class="gm-note-inline">SS ↔ LB status sync is handled via <strong>Zapier</strong> — Grace owns this build.</div>
+      </div>
+    </div>
+    <div class="gm-notes">
+      <div class="gm-notes-head">
+        <span class="gm-notes-icon">📝</span>
+        <span class="gm-notes-title">My notes</span>
+        <span class="gm-notes-saved" id="gmNotesSaved">Auto-saves locally</span>
+      </div>
+      <textarea id="graceMichaelaNotes" placeholder="Type notes from your calls with Michaela here — updates, decisions, follow-ups, questions for next time. Auto-saves to your browser."></textarea>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- COHORT -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>The Cohort · 4 Portals Live by Day 60</h2>
+        <div class="h-aside">Comcast continues + 3 we build &amp; learn together</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="seq-bar">
+    <div class="seq-step"><div class="seq-when">May 26 → Jun 7</div><div class="seq-what">Michaela helps <strong>build</strong> the 3 portals</div></div>
+    <div class="seq-arrow">→</div>
+    <div class="seq-step active"><div class="seq-when">Jun 8–10 (Detroit)</div><div class="seq-what">Champions <strong>train on their real portals</strong></div></div>
+    <div class="seq-arrow">→</div>
+    <div class="seq-step done"><div class="seq-when">Jun 11 → Jun 25</div><div class="seq-what">Champions <strong>activate &amp; invite clients</strong></div></div>
+  </div>
+  <div class="beta-row beta-row-4">
+    <div class="beta" style="border-left: 3px solid #047857; background: #f0fdf4;">
+      <div class="client">Comcast ✓</div>
+      <div class="stats">
+        <span><strong>5</strong> projects (3 active · 2 queued)</span>
+        <span>Ad Age · Sophia</span>
+        <span class="pill green">Live</span>
+      </div>
+    </div>
+    <div class="beta">
+      <div class="client">MAHP</div>
+      <div class="stats">
+        <span><strong>11</strong> projects</span>
+        <span>DET + GR</span>
+        <span class="pill amber">Build</span>
+      </div>
+    </div>
+    <div class="beta">
+      <div class="client">Wintrust</div>
+      <div class="stats">
+        <span><strong>9</strong> projects</span>
+        <span>CHI + DET + GR</span>
+        <span class="pill amber">Build</span>
+      </div>
+    </div>
+    <div class="beta">
+      <div class="client">Solera</div>
+      <div class="stats">
+        <span><strong>11</strong> projects</span>
+        <span>AN</span>
+        <span class="pill amber">Build</span>
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- 30/60/90 -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>The 30 / 60 / 90 · Kicks off Tue May 26</h2>
+        <div class="h-aside">Why · How · Goal · Day 90 = $3M live (aggressive)</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="phases-v2">
+
+    <div class="phase-v2 p1">
+      <div class="phase-head">
+        <div class="phase-num">1</div>
+        <div class="phase-meta">
+          <div class="phase-days">May 26 → Jun 25 · Days 1–30</div>
+          <div class="phase-title">Cohort Live + Foundation</div>
+        </div>
+        <div class="phase-end">
+          <div class="phase-end-num">~5 portals · ~$300K</div>
+          <div class="phase-end-label">Comcast + cohort live · AdOps embedded</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="why-how-goal">
+          <div class="whg-card">
+            <div class="whg-label">Why</div>
+            <div class="whg-text">Prove the model on the cohort fast. Train at Detroit early in the phase so champions are activating real portals by end of Day 30, not building from scratch on Day 60.</div>
+          </div>
+          <div class="whg-card">
+            <div class="whg-label">How</div>
+            <ul>
+              <li><strong>May 26–Jun 7:</strong> Build MAHP, Wintrust, Solera portals with Michaela. Lock V1 master template + SOPs.</li>
+              <li><strong>Jun 8–10 Detroit cohort:</strong> Champions train on their real portals · Michaela co-fac + office day</li>
+              <li><strong>Jun 11–25:</strong> Activate cohort portals · client invites sent · projects flowing</li>
+              <li>Confirm 2 champions per brand · AdOps delegate embedded from Day 1</li>
+              <li>Workspace cleanup — archive legacy templates, experimental projects</li>
+            </ul>
+          </div>
+          <div class="whg-card">
+            <div class="whg-label">Goal</div>
+            <div class="whg-text">By Jun 25: <strong>5 portals live</strong>, AdOps actively shadowing, templates locked, momentum visible.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-v2 p2">
+      <div class="phase-head">
+        <div class="phase-num">2</div>
+        <div class="phase-meta">
+          <div class="phase-days">Jun 26 → Jul 24 · Days 31–60</div>
+          <div class="phase-title">Aggressive Scale</div>
+        </div>
+        <div class="phase-end">
+          <div class="phase-end-num">~20 portals · ~$1.8M</div>
+          <div class="phase-end-label">~half of CW scope · expand into white papers + print combos</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="why-how-goal">
+          <div class="whg-card">
+            <div class="whg-label">Why</div>
+            <div class="whg-text">Scale fast on the proven model. Each PM owns building their own portfolio. Layer in additional product types (white papers, print combos) using the same template foundation.</div>
+          </div>
+          <div class="whg-card">
+            <div class="whg-label">How</div>
+            <ul>
+              <li>Each PM builds ~3 more portals in their portfolio (their top clients)</li>
+              <li>White Paper + Print Combo templates built (variants of master)</li>
+              <li>AdOps actively shadowing 5+ live projects · running co-PM duties</li>
+              <li>First client NPS responses roll in</li>
+              <li>V1.1 SOP written by cohort champions, not Grace</li>
+              <li><strong>Day 45 kill criteria check:</strong> if &lt;10 portals live, scope flex to Day 120 fallback for full $3M</li>
+            </ul>
+          </div>
+          <div class="whg-card">
+            <div class="whg-label">Goal</div>
+            <div class="whg-text">By Jul 24: <strong>~20 portals live</strong> covering ~half of CW scope, AdOps running solo on at least 1, Grace stepping back.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-v2 p3">
+      <div class="phase-head">
+        <div class="phase-num">3</div>
+        <div class="phase-meta">
+          <div class="phase-days">Jul 25 → Aug 24 · Days 61–90</div>
+          <div class="phase-title">Full Coverage + AdOps Owns</div>
+        </div>
+        <div class="phase-end">
+          <div class="phase-end-num">30+ portals · ~$3M+</div>
+          <div class="phase-end-label">All 339 CW projects in LB · AdOps owns ops · Grace = superuser</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="why-how-goal">
+          <div class="whg-card">
+            <div class="whg-label">Why</div>
+            <div class="whg-text">Close the gap to $3M. All remaining clients onboarded. AdOps fully assumes operations. Grace transitions to superuser / governance.</div>
+          </div>
+          <div class="whg-card">
+            <div class="whg-label">How</div>
+            <ul>
+              <li>Onboard remaining ~10 portals to hit 30+ total</li>
+              <li>AdOps runs operations independently · Grace as escalation only</li>
+              <li>Publish playbook · owned by AdOps</li>
+              <li>Deprecate alternate intake paths for all CW products</li>
+              <li>Monthly Michaela check-ins stand up</li>
+              <li>Retro + decision on next product types (Custom Convo, Webinars) — Kristen T owns</li>
+            </ul>
+          </div>
+          <div class="whg-card">
+            <div class="whg-label">Goal</div>
+            <div class="whg-text">By Aug 24: <strong>30+ portals live · all 339 CW projects in LB · $3M+ flowing · AdOps OWNS</strong>. Grace shifts to superuser / governance.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    </div>
+  </details>
+
+  <!-- BEYOND DAY 90 -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Beyond Day 90 · Steady State + Next Horizons</h2>
+        <div class="h-aside">Aug 25+ · AdOps operates · Grace governs · Michaela on retainer</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="horizon-2">
+    <div class="h2-head">
+      <div class="h2-jump">
+        <div class="h2-from">$3M+ live</div>
+        <div class="h2-arrow">→</div>
+        <div class="h2-to">Steady state</div>
+      </div>
+      <div class="h2-meta">
+        <div class="h2-meta-line">By Aug 24 <strong>all client-written work</strong> is in LB. From here, it runs.</div>
+        <div class="h2-sub">Monthly Michaela check-ins · Grace = governance + escalation · AdOps = day-to-day ops</div>
+      </div>
+    </div>
+    <div class="h2-products">
+      <div class="h2-product">
+        <div class="h2-p-name">All Client-Written</div>
+        <div class="h2-p-stats">339 projects · 30+ portals · $3M+</div>
+        <div class="h2-p-state proven">Live by Day 90 ✓</div>
+      </div>
+      <div class="h2-product">
+        <div class="h2-p-name">Custom Conversation Video</div>
+        <div class="h2-p-stats">Different workflow (Multimedia owns)</div>
+        <div class="h2-p-state next">Q4 evaluation</div>
+      </div>
+      <div class="h2-product">
+        <div class="h2-p-name">Webinars</div>
+        <div class="h2-p-stats">Multi-week production cycle · different fit</div>
+        <div class="h2-p-state next">Q4 evaluation</div>
+      </div>
+      <div class="h2-product">
+        <div class="h2-p-name">Events / Sponsorships</div>
+        <div class="h2-p-stats">Andrea + events team own currently</div>
+        <div class="h2-p-state next">Out of scope</div>
+      </div>
+    </div>
+    <div class="h2-foot">
+      <div><strong>Steady state:</strong> AdOps owns day-to-day. Grace = governance + escalation only. Michaela = monthly retainer.</div>
+      <div><strong>Next horizons:</strong> Kristen T owns Q4 decision on what (if anything) joins LB next.</div>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- 3 ASKS -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>The Three Asks</h2>
+        <div class="h-aside">Without these, the plan slips</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="asks">
+    <div class="ask-card launchbay">
+      <h4>Ask Launchbay</h4>
+      <div class="who-name">Michaela Jarvis · Post-call status</div>
+      <ul>
+        <li>✓ <b>Role-based training framework agreed</b> — Builders / Daily Users / Managers</li>
+        <li>✓ <b>2 sessions next week</b> — Tue walkthrough + Fri client role-play</li>
+        <li>✓ <b>Zapier path confirmed</b> for SS → LB automation</li>
+        <li>○ <b>Sandbox/test account</b> — Michaela checking with devs</li>
+        <li>○ <b>CSV bulk upload walkthrough</b> — Grace formats SS export, Michaela validates structure + walks through backend "send invite" flow</li>
+        <li>○ <b>In-person Detroit office training</b> — pending Michaela's manager approval</li>
+        <li>○ <b>PPCW template review</b> — Grace to send workflow with roles, Michaela reviews</li>
+        <li>○ <b>Post-project NPS survey questions</b> — Grace sending list</li>
+        <li>→ <b>Monthly check-ins</b> ongoing post-Day-90</li>
+        <li>→ <b>Pricing model</b> — Grace owns (email Evan, not Michaela)</li>
+      </ul>
+    </div>
+    <div class="ask-card crain">
+      <h4>Ask Crain Leadership</h4>
+      <div class="who-name">Kristin Bull</div>
+      <ul>
+        <li><b>Get me a KT meeting</b> this week — critical path</li>
+        <li><b>Formalize Natalie Bonadeo</b> as deputy / superuser-in-training (City Brands, highest project volume)</li>
+        <li><b>Hire Sammy's backfill</b> as LB-critical, not just ops</li>
+        <li><b>Weekly check-in</b> with brand leads: "What's your team's LB portal count?"</li>
+        <li><b>Champion scorecard</b> in Q3/Q4 perf reviews</li>
+      </ul>
+    </div>
+    <div class="ask-card adops">
+      <h4>Ask AdOps</h4>
+      <div class="who-name">Kristen Thornton</div>
+      <ul>
+        <li><b>Confirm EOY ownership commitment</b> on the record</li>
+        <li><b>Name your delegate</b> who embeds Day 1 (May 26), not at Day 60+</li>
+        <li><b>Co-author V1 SOP</b> — not recipient of V1.1</li>
+        <li><b>Run ≥1 portal solo</b> by Day 90</li>
+        <li><b>Own template governance</b> post-handoff — Grace stays as superuser for governance/escalation</li>
+      </ul>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- METRICS / PROGRESS -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Success Metrics @ Day 90</h2>
+        <div class="h-aside">Updated weekly</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="label">In-scope portals live</div>
+      <div class="progress-num">1 <span class="target">/ 10</span></div>
+      <div class="bar"><div class="bar-fill amber" style="width: 10%"></div></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Projects routed through LB</div>
+      <div class="progress-num">2 <span class="target">/ ~58</span></div>
+      <div class="bar"><div class="bar-fill amber" style="width: 3%"></div></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Trained champions</div>
+      <div class="progress-num">1 <span class="target">/ 12</span></div>
+      <div class="bar"><div class="bar-fill amber" style="width: 8%"></div></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">AdOps shadowed projects</div>
+      <div class="progress-num">0 <span class="target">/ 10</span></div>
+      <div class="bar"><div class="bar-fill red" style="width: 0%"></div></div>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- PM BREAKDOWN -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Project Managers · The Workload Shift</h2>
+        <div class="h-aside">Today's PM lift vs. what's left when AdOps owns it</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+
+  <div class="workload-frame">
+    <strong>This isn't more work for AdOps.</strong> We're handing them a structured, automated system that runs itself when everyone follows the process. Clear accountability in Launchbay, clear support structure via Michaela, less email chasing for PMs. <strong>Everyone's life gets easier.</strong>
+  </div>
+
+  <div class="before-after">
+    <div class="ba-col current">
+      <div class="ba-label">Today · PM lift per project</div>
+      <ul>
+        <li>Create Smartsheet project plan + child tasks</li>
+        <li>Email client for kickoff + send PDF intake</li>
+        <li>Chase client over email for assets</li>
+        <li>Manual status updates across SS, email, Slack</li>
+        <li>Email Design Hub with assets &amp; brief</li>
+        <li>Route approvals back through email threads</li>
+        <li>Compile post-campaign reporting manually</li>
+        <li>Field "where are we?" questions all day</li>
+      </ul>
+      <div class="ba-meta">~6–8 PM touchpoints per project · most of the day in email</div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-col future">
+      <div class="ba-label">Day 90+ · PM lift per project</div>
+      <ul>
+        <li><strong>Review content before design</strong></li>
+        <li>That's it.</li>
+      </ul>
+      <div class="ba-meta"><strong>Portal handles</strong> intake · asset collection · status sync · 8-phase routing · client comms · reporting.</div>
+      <div class="ba-meta"><strong>AdOps handles</strong> operational ownership, escalations, downstream handoffs.</div>
+      <div class="ba-meta"><strong>Michaela handles</strong> platform support &amp; training.</div>
+      <div class="ba-meta">~1 PM touchpoint per project · PMs get hours back</div>
+    </div>
+  </div>
+
+  <div class="pm-grid">
+    <div class="pm-card">
+      <div class="pm-head">
+        <div class="pm-name">Sophia Juarez</div>
+        <div class="pm-brand">Ad Age</div>
+      </div>
+      <div class="pm-state">
+        <div class="ps-row in-lb"><span class="ps-tag">In LB now</span> Comcast · 5 projects</div>
+        <div class="ps-row off-lb"><span class="ps-tag">Off LB (email + SS)</span> Horizon Media 6 · IAB 5</div>
+        <div class="ps-row future"><span class="ps-tag">Day 90+</span> Review content before design</div>
+      </div>
+      <div class="pm-backup">Backup: <strong>Shelly Maldonado</strong></div>
+    </div>
+    <div class="pm-card">
+      <div class="pm-head">
+        <div class="pm-name">kathy carr</div>
+        <div class="pm-brand">City Brands · MAHP lead</div>
+      </div>
+      <div class="pm-state">
+        <div class="ps-row in-lb"><span class="ps-tag">In LB now</span> None — all email + SS</div>
+        <div class="ps-row off-lb"><span class="ps-tag">Off LB</span> MAHP 11 projects (moves into LB by Day 30)</div>
+        <div class="ps-row future"><span class="ps-tag">Day 90+</span> Review content before design</div>
+      </div>
+      <div class="pm-backup">Backup: <strong>Natalie Bonadeo</strong></div>
+    </div>
+    <div class="pm-card" style="border-top-color: #d97706;">
+      <div class="pm-head">
+        <div class="pm-name">Interim coverage · Sammy → backfill</div>
+        <div class="pm-brand">Modern Healthcare</div>
+      </div>
+      <div class="pm-state">
+        <div class="ps-row in-lb"><span class="ps-tag">In LB now</span> None — all email + SS</div>
+        <div class="ps-row off-lb"><span class="ps-tag">Off LB</span> 17 MH projects (Magical, NBCRNA, Public Partnerships, Centers, Marsh, etc.)</div>
+        <div class="ps-row future"><span class="ps-tag">Day 90+</span> Review content before design</div>
+      </div>
+      <div class="pm-backup">
+        <div style="margin-bottom: 6px;"><strong>Interim plan</strong> (until backfill hired):</div>
+        <ul style="margin: 0 0 6px 0; padding-left: 16px; font-size: 11.5px; line-height: 1.4;">
+          <li><strong>Content review:</strong> Colin + Alison (GW healthcare fluency)</li>
+          <li><strong>MH operations:</strong> Grace temporarily (portal build, client invites)</li>
+          <li><strong>Editorial backup:</strong> Shannon Mortland</li>
+        </ul>
+        <span class="pm-risk">⚠ Sammy backfill target: hired by Day 30 (Jun 25)</span>
+      </div>
+    </div>
+    <div class="pm-card">
+      <div class="pm-head">
+        <div class="pm-name">Brittany Brown + Jordan Dziura</div>
+        <div class="pm-brand">City Brands</div>
+      </div>
+      <div class="pm-state">
+        <div class="ps-row in-lb"><span class="ps-tag">In LB now</span> None — all email + SS</div>
+        <div class="ps-row off-lb"><span class="ps-tag">Off LB</span> Wintrust 9 (Brittany) · plus any Sammy City Brands work to redistribute</div>
+        <div class="ps-row future"><span class="ps-tag">Day 90+</span> Review content before design</div>
+      </div>
+      <div class="pm-backup">Backup: <strong>Natalie Bonadeo</strong> · Jordan picks up Powering Chicago + can absorb additional City Brands load</div>
+    </div>
+    <div class="pm-card">
+      <div class="pm-head">
+        <div class="pm-name">Veronica Johnson</div>
+        <div class="pm-brand">Automotive News</div>
+      </div>
+      <div class="pm-state">
+        <div class="ps-row in-lb"><span class="ps-tag">In LB now</span> None — all email + SS</div>
+        <div class="ps-row off-lb"><span class="ps-tag">Off LB</span> Solera 11 projects (moves into LB by Day 30)</div>
+        <div class="ps-row future"><span class="ps-tag">Day 90+</span> Review content before design</div>
+      </div>
+      <div class="pm-backup">Backup: <strong>Jessica Leydet</strong></div>
+    </div>
+    <div class="pm-card">
+      <div class="pm-head">
+        <div class="pm-name">Natalie Bonadeo</div>
+        <div class="pm-brand">City Brands · Deputy</div>
+      </div>
+      <div class="pm-state">
+        <div class="ps-row in-lb"><span class="ps-tag">In LB now</span> None — all email + SS</div>
+        <div class="ps-row off-lb"><span class="ps-tag">Off LB</span> DTE 4 · Michigan Ross 3 (moves into LB Day 31–60)</div>
+        <div class="ps-row future"><span class="ps-tag">Day 90+</span> Deputy / superuser role · content reviews</div>
+      </div>
+      <div class="pm-backup">Backup: <strong>Brittany Brown</strong></div>
+    </div>
+    <div class="pm-card">
+      <div class="pm-head">
+        <div class="pm-name">Shelly Maldonado</div>
+        <div class="pm-brand">Ad Age</div>
+      </div>
+      <div class="pm-state">
+        <div class="ps-row in-lb"><span class="ps-tag">In LB now</span> None — all email + SS</div>
+        <div class="ps-row off-lb"><span class="ps-tag">Off LB</span> YouTube 4 projects (moves into LB Day 31–60)</div>
+        <div class="ps-row future"><span class="ps-tag">Day 90+</span> Review content before design</div>
+      </div>
+      <div class="pm-backup">Backup: <strong>Sophia Juarez</strong></div>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- ROLE-BASED TRAINING (new — from Michaela call May 14) -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Role-Based Training · The Three Tiers</h2>
+        <div class="h-aside">From Michaela call May 14 — prevent user overwhelm by training by role, not by feature</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+      <div class="benefits-intro" style="border-left-color: #5b21b6;">
+        Michaela's recommendation: <strong>don't train everyone on everything.</strong> Train each person on the slice of LB they actually use. Three role tiers · separate training paths · much faster ramp.
+      </div>
+      <div class="role-grid">
+        <div class="role-card builder">
+          <div class="role-tag">Tier 1</div>
+          <div class="role-name">Builders</div>
+          <div class="role-desc">Create &amp; maintain templates, build new portals, configure automations</div>
+          <div class="role-who">
+            <strong>Who at Crain:</strong> Grace (today) · Natalie (deputy) · AdOps delegate (by Day 90) · Michaela (vendor)
+          </div>
+          <div class="role-training">
+            <strong>Training:</strong> Deep platform fluency · template construction · Zapier integration · permissions admin
+          </div>
+        </div>
+        <div class="role-card daily">
+          <div class="role-tag">Tier 2</div>
+          <div class="role-name">Daily Users</div>
+          <div class="role-desc">Operate within templates · run client portals · execute the 8-phase workflow</div>
+          <div class="role-who">
+            <strong>Who at Crain:</strong> Sophia · Brittany · Veronica · kathy · Shelly · Sammy backfill · Jordan
+          </div>
+          <div class="role-training">
+            <strong>Training:</strong> Their portfolio + workflow only · client invite + content review focus · graduates to "Review content before design" steady state
+          </div>
+        </div>
+        <div class="role-card manager">
+          <div class="role-tag">Tier 3</div>
+          <div class="role-name">Managers</div>
+          <div class="role-desc">Review, oversee, see dashboards · don't operate</div>
+          <div class="role-who">
+            <strong>Who at Crain:</strong> Kristin · Deana · Kristen Thornton · Sales leadership
+          </div>
+          <div class="role-training">
+            <strong>Training:</strong> Read-only dashboard tour · how to ask "what's the LB count this week" · escalation paths
+          </div>
+        </div>
+      </div>
+      <div class="role-foot">
+        <strong>Why this is a big deal:</strong> The old plan trained 12 champions on the full platform. The role-based approach is faster (each tier ramps in their slice), more durable (people retain what they actually use), and matches the workload-shift framing (Daily Users do less, not more, over time).
+      </div>
+    </div>
+  </details>
+
+  <!-- MAKE LB STICK -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Making Launchbay Stick · 4 Reinforcement Layers</h2>
+        <div class="h-aside">How adoption becomes habit, not effort</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="stick-intro">
+    Voluntary tool adoption usually plateaus at 30–40% without structural reinforcement. To hit 50%+ at Day 90 and stay there, four mechanisms layer on each other — each one alone is fragile; together they hold.
+  </div>
+  <div class="stick-grid">
+    <div class="stick-card layer-1">
+      <div class="stick-icon">⚙️</div>
+      <div class="stick-label">Layer 1 · Process</div>
+      <div class="stick-title">Make LB the path of least resistance</div>
+      <div class="stick-body">
+        <ul>
+          <li><strong>LB project ID</strong> becomes a required field in Smartsheet IO intake — no ID, no kickoff</li>
+          <li><strong>Status syncs auto</strong> from LB → SS so PMs don't update both places</li>
+          <li><strong>Intake form replaces email</strong> for client asset collection</li>
+          <li><strong>Client invite</strong> is the kickoff trigger, not an email thread</li>
+        </ul>
+      </div>
+      <div class="stick-owner">Owner: Grace · Smartsheet automation</div>
+    </div>
+
+    <div class="stick-card layer-2">
+      <div class="stick-icon">👥</div>
+      <div class="stick-label">Layer 2 · People</div>
+      <div class="stick-title">Weekly visibility from leadership</div>
+      <div class="stick-body">
+        <ul>
+          <li><strong>Kristin asks brand leads weekly:</strong> "What's your team's LB portal count this week?"</li>
+          <li><strong>Champion check-ins</strong> with Grace / Natalie every 2 weeks</li>
+          <li><strong>Monthly Michaela syncs</strong> for ongoing CS / platform feedback</li>
+          <li><strong>Trailblazers Slack</strong> stays active as peer-support channel</li>
+        </ul>
+      </div>
+      <div class="stick-owner">Owner: Kristin + Grace</div>
+    </div>
+
+    <div class="stick-card layer-3">
+      <div class="stick-icon">📊</div>
+      <div class="stick-label">Layer 3 · Scorecard</div>
+      <div class="stick-title">Tie it to performance reviews</div>
+      <div class="stick-body">
+        <ul>
+          <li><strong>Q3/Q4 perf reviews</strong> include "% of digital articles run in LB"</li>
+          <li><strong>Champion goal:</strong> 3 LB projects shipped without escalation = graduated</li>
+          <li><strong>Deputy goal (Natalie):</strong> Cross-brand superuser by Day 90 (Aug 24)</li>
+          <li><strong>AdOps goal:</strong> Solo-run ≥1 portal by Day 90</li>
+        </ul>
+      </div>
+      <div class="stick-owner">Owner: Kristin (formalize with HR)</div>
+    </div>
+
+    <div class="stick-card layer-4">
+      <div class="stick-icon">💰</div>
+      <div class="stick-label">Layer 4 · Renewal Story</div>
+      <div class="stick-title">Make LB usage = sales advantage</div>
+      <div class="stick-body">
+        <ul>
+          <li><strong>Renewal narratives pulled from LB data</strong>, not memory or scattered emails</li>
+          <li><strong>Client NPS / engagement</strong> visible per portal — sales talking point</li>
+          <li><strong>"What happened on this campaign?"</strong> answered in one place</li>
+          <li><strong>Recurring clients</strong> (MAHP, Wintrust, Solera) compound the data advantage</li>
+        </ul>
+      </div>
+      <div class="stick-owner">Owner: AdOps + Sales leadership</div>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- RISKS -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Risks &amp; Blockers</h2>
+        <div class="h-aside">Five known factual blockers</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="risks-flat">
+    <div class="risk-item-lg">
+      <div class="risk-tag high">High · Mitigated</div>
+      <b>Aggressive 90-day timeline for full $3M scope</b>
+      <div class="why">Originally critical (would have required ~1 new portal/business day). <strong>Bulk CSV upload + decoupled "send invite" gating now make this feasible</strong> — portals get pre-created in bulk, champions activate post-training. New bottleneck is training+activation pace, not creation. Day 45 check still in place as scope-flex safety net.</div>
+    </div>
+    <div class="risk-item-lg">
+      <div class="risk-tag high">High · Mitigated</div>
+      <b>Sammy's exit before backfill hire</b>
+      <div class="why">17 MH projects need coverage. <strong>Interim plan:</strong> Colin + Alison (GW) cover content review, Grace covers MH ops, Shannon Mortland as editorial backup. Brittany + Jordan absorb any Sammy City Brands work. Backfill target: hired by Day 30 (Jun 25).</div>
+    </div>
+    <div class="risk-item-lg">
+      <div class="risk-tag crit">Critical</div>
+      <b>KT handoff not yet confirmed</b>
+      <div class="why">Kristin's intent is not yet KT's commitment. Need delegate named.</div>
+    </div>
+    <div class="risk-item-lg">
+      <div class="risk-tag high">High</div>
+      <b>Seat capacity</b>
+      <div class="why">RevOps + Multimedia seats must consolidate before City Brands champions come online.</div>
+    </div>
+    <div class="risk-item-lg">
+      <div class="risk-tag high">High</div>
+      <b>Detroit cohort = single in-person moment</b>
+      <div class="why">Virtual fallback needed by May 30 if slipping.</div>
+    </div>
+    <div class="risk-item-lg">
+      <div class="risk-tag high">High</div>
+      <b>Launchbay workspace cleanup</b>
+      <div class="why">Per Michaela call May 14: legacy templates + experimental projects (Cint, Roundel, Paramount) need archiving · user role audit needed (wrong Manager vs Admin assignments) · Slack integration broken. Pre-kickoff fix list.</div>
+    </div>
+    <div class="risk-item-lg">
+      <div class="risk-tag high">High</div>
+      <b>Detroit in-person training not yet confirmed</b>
+      <div class="why">Pending approval from Michaela's manager. Plan B: virtual sessions (Michaela already committed to Tue + Fri sessions next week as warm-up).</div>
+    </div>
+    <div class="risk-item-lg">
+      <div class="risk-tag med">Medium</div>
+      <b>CSV bulk upload auto-creates CRM contacts</b>
+      <div class="why">Side effect: contact records get staged before champions are trained. Mitigation: "send portal invite" is a separate gated action — no premature client outreach. Need governance rule: <strong>no manual contact emails until champion is trained on that portal.</strong></div>
+    </div>
+  </div>
+
+    </div>
+  </details>
+
+  <!-- EXPANDABLES — Data view -->
+  <details class="sect">
+    <summary class="h-row">
+      <div class="h-row-inner">
+        <h2>Reference Data</h2>
+        <div class="h-aside">Click any section to expand the underlying data</div>
+      </div>
+      <span class="sect-toggle">›</span>
+    </summary>
+    <div class="sect-body">
+  <div class="expand-row">
+    <details class="expand">
+      <summary><span class="title">📊 How the 132 digital-article projects break down by brand</span><span class="arrow">›</span></summary>
+      <div class="body">
+        <div class="chart-wrap"><div class="static-chart"><svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto;">
+  <!-- Axes -->
+  <line x1="60" y1="20" x2="60" y2="220" stroke="#9ca3af" stroke-width="1"/>
+  <line x1="60" y1="220" x2="680" y2="220" stroke="#9ca3af" stroke-width="1"/>
+
+  <!-- Y axis ticks -->
+  <text x="50" y="225" text-anchor="end" font-family="-apple-system, sans-serif" font-size="10" fill="#6b7280">0</text>
+  <text x="50" y="186" text-anchor="end" font-family="-apple-system, sans-serif" font-size="10" fill="#6b7280">15</text>
+  <text x="50" y="152" text-anchor="end" font-family="-apple-system, sans-serif" font-size="10" fill="#6b7280">30</text>
+  <text x="50" y="118" text-anchor="end" font-family="-apple-system, sans-serif" font-size="10" fill="#6b7280">45</text>
+  <text x="50" y="84" text-anchor="end" font-family="-apple-system, sans-serif" font-size="10" fill="#6b7280">60</text>
+
+  <!-- Grid lines -->
+  <line x1="60" y1="182" x2="680" y2="182" stroke="#f3f4f6"/>
+  <line x1="60" y1="144" x2="680" y2="144" stroke="#f3f4f6"/>
+  <line x1="60" y1="106" x2="680" y2="106" stroke="#f3f4f6"/>
+  <line x1="60" y1="68" x2="680" y2="68" stroke="#f3f4f6"/>
+
+  <!-- Bars: 5 brands, each with Projects (teal) and Clients (amber) -->
+  <!-- City Brands: 55 projects, 19 clients -->
+  <rect x="100" y="80" width="40" height="140" fill="#0b5563" rx="3"/>
+  <rect x="143" y="172" width="40" height="48" fill="#d97706" rx="3"/>
+  <text x="142" y="240" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#0f1a2e">City Brands</text>
+
+  <!-- Ad Age: 28 projects, 15 clients -->
+  <rect x="220" y="148" width="40" height="72" fill="#0b5563" rx="3"/>
+  <rect x="263" y="182" width="40" height="38" fill="#d97706" rx="3"/>
+  <text x="262" y="240" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#0f1a2e">Ad Age</text>
+
+  <!-- AN: 23 projects, 9 clients -->
+  <rect x="340" y="161" width="40" height="59" fill="#0b5563" rx="3"/>
+  <rect x="383" y="197" width="40" height="23" fill="#d97706" rx="3"/>
+  <text x="382" y="240" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#0f1a2e">AN</text>
+
+  <!-- MH: 17 projects, 11 clients -->
+  <rect x="460" y="176" width="40" height="44" fill="#0b5563" rx="3"/>
+  <rect x="503" y="192" width="40" height="28" fill="#d97706" rx="3"/>
+  <text x="502" y="240" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#0f1a2e">MH</text>
+
+  <!-- Hart Energy: 1 project, 1 client -->
+  <rect x="580" y="218" width="40" height="3" fill="#0b5563" rx="2"/>
+  <rect x="623" y="218" width="40" height="3" fill="#d97706" rx="2"/>
+  <text x="622" y="240" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" fill="#0f1a2e">Hart Energy</text>
+
+  <!-- Legend -->
+  <rect x="240" y="260" width="14" height="12" fill="#0b5563"/>
+  <text x="260" y="270" font-family="-apple-system, sans-serif" font-size="11" fill="#1a2332">Projects</text>
+  <rect x="340" y="260" width="14" height="12" fill="#d97706"/>
+  <text x="360" y="270" font-family="-apple-system, sans-serif" font-size="11" fill="#1a2332">Clients</text>
+</svg></div></div>
+        <p style="margin-top: 12px; color: #4b5563;"><strong>Read:</strong> City Brands drives volume (55 projects, ~19 clients). MH drives revenue ($430K, $25K avg per project). AN added May 14 — Solera is ~half of AN's volume.</p>
+      </div>
+    </details>
+
+    <details class="expand">
+      <summary><span class="title">🎯 Top 10 clients — the 17% that drive ~50% of project volume</span><span class="arrow">›</span></summary>
+      <div class="body">
+        <table class="tight">
+          <thead><tr><th>Client</th><th>Projects</th><th>Brand(s)</th><th>PM</th></tr></thead>
+          <tbody>
+            <tr><td>MAHP</td><td>11</td><td>DET + GR</td><td>kathy / Sammy</td></tr>
+            <tr><td>Solera</td><td>11+</td><td>AN</td><td>Veronica</td></tr>
+            <tr><td>Wintrust</td><td>9</td><td>CHI + DET + GR</td><td>Brittany</td></tr>
+            <tr><td>Horizon Media</td><td>6</td><td>Ad Age</td><td>Sophia</td></tr>
+            <tr><td>IAB</td><td>5</td><td>Ad Age</td><td>Sophia</td></tr>
+            <tr><td>DTE Energy</td><td>4</td><td>Detroit</td><td>Natalie</td></tr>
+            <tr><td>YouTube</td><td>4</td><td>Ad Age</td><td>Shelly</td></tr>
+            <tr><td>Magical</td><td>3</td><td>MH</td><td>Sammy</td></tr>
+            <tr><td>Michigan Ross</td><td>3</td><td>Detroit</td><td>Natalie</td></tr>
+            <tr><td>Old National Bank</td><td>3</td><td>CHI + DET</td><td>Brittany</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top: 10px; color: #6b7280; font-size: 12px;">Top 10 = ~59 projects = ~45% of total. The cohort (MAHP + Wintrust + Solera) and Day 90 expansion (next 6) are all drawn from this list.</p>
+      </div>
+    </details>
+
+    <details class="expand">
+      <summary><span class="title">👥 Who's running each brand's portals — champion roster</span><span class="arrow">›</span></summary>
+      <div class="body">
+        <table class="tight">
+          <thead><tr><th>Brand</th><th>Vol</th><th>Lead</th><th>Backup</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><b>City Brands</b></td><td>55</td><td>Natalie Bonadeo</td><td>Brittany Brown</td><td><span class="pill green">Confirmed</span></td></tr>
+            <tr><td><b>Ad Age</b></td><td>28</td><td>Shelly Maldonado</td><td>Sophia Juarez</td><td><span class="pill green">Confirmed</span></td></tr>
+            <tr><td><b>Automotive News</b></td><td>23</td><td>Veronica Johnson</td><td>Jessica Leydet</td><td><span class="pill green">Confirmed</span></td></tr>
+            <tr><td><b>Modern Healthcare</b></td><td>17</td><td>Sammy's replacement (TBD)</td><td>Shannon Mortland</td><td><span class="pill red">Critical hire</span></td></tr>
+            <tr><td><b>Hart Energy</b></td><td>1</td><td>Jennifer Keirn</td><td>—</td><td><span class="pill green">Confirmed</span></td></tr>
+            <tr><td><i>AdOps (EOY)</i></td><td>—</td><td>KT delegate (TBD)</td><td>—</td><td><span class="pill red">Critical path</span></td></tr>
+            <tr><td><i>Deputy / Superuser-in-training</i></td><td>—</td><td>Natalie Bonadeo</td><td>Brittany Brown</td><td><span class="pill purple">Recommended</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="expand">
+      <summary><span class="title">🔁 The 8-phase workflow every portal will follow</span><span class="arrow">›</span></summary>
+      <div class="body">
+        <p>This is the standardized workflow Comcast already runs. Every new portal will use this same shape, with brand-specific timing variants.</p>
+        <ol style="margin:0; padding-left: 18px;">
+          <li><b>Kickoff &amp; Intake</b> — call, scope, intake form, client outreach cadence</li>
+          <li><b>Asset &amp; Copy</b> — V1 draft + assets received, strategist review</li>
+          <li><b>Editorial</b> — V1 → freelance → client → V2 → final approval</li>
+          <li><b>Design Hub</b> — Arc composition, AdOps places banners</li>
+          <li><b>Preview &amp; Approval</b> — client signs off on composed article</li>
+          <li><b>Distribution Setup</b> — newsletter, right rail, native, social</li>
+          <li><b>Launch</b> — verify, go live, deliver live link</li>
+          <li><b>Reporting</b> — wrap report to client + LB record</li>
+        </ol>
+      </div>
+    </details>
+
+  </div>
+
+
+    </div>
+  </details>
+
+  <p class="foot">Crain Communications · Advertising Solutions · Launchbay Adoption Plan · 2026<br>Live working doc · updated in real time · last refreshed May 14, 2026</p>
+
+</div>
+
+<script>
+// Initialize Mermaid — explicit run after init
+if (typeof mermaid !== 'undefined') {
+  mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'default' });
+  document.addEventListener('DOMContentLoaded', function() {
+    mermaid.run({ querySelector: 'pre.mermaid' }).catch(function(e) {
+      console.error('Mermaid render failed:', e);
+    });
+  });
+  // Fallback if DOMContentLoaded already fired
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(function() {
+      mermaid.run({ querySelector: 'pre.mermaid' }).catch(function(e) {
+        console.error('Mermaid render failed:', e);
+      });
+    }, 10);
+  }
+}
+
+// Lazy-init Chart.js when its <details> opens
+var brandChartInstance = null;
+function initBrandChart() {
+  if (brandChartInstance) return;
+  var ctx = document.getElementById('brandChart');
+  if (!ctx || typeof Chart === 'undefined') return;
+  brandChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['City Brands', 'Ad Age', 'AN', 'MH', 'Hart Energy'],
+        datasets: [
+          {
+            label: 'Projects',
+            data: [55, 28, 23, 17, 1],
+            backgroundColor: '#0b5563',
+            borderRadius: 4,
+            yAxisID: 'y',
+          },
+          {
+            label: 'Clients',
+            data: [19, 15, 9, 11, 1],
+            backgroundColor: '#d97706',
+            borderRadius: 4,
+            yAxisID: 'y',
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } }
+        },
+        scales: {
+          y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { size: 10 } } },
+          x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+  });
+}
+
+// Wire up details toggle to lazy-init chart when opened
+document.addEventListener('DOMContentLoaded', function() {
+  var chartDetails = document.querySelector('#brandChart')?.closest('details');
+  if (chartDetails) {
+    chartDetails.addEventListener('toggle', function() {
+      if (chartDetails.open) {
+        setTimeout(initBrandChart, 50);
+      }
+    });
+    if (chartDetails.open) setTimeout(initBrandChart, 50);
+  }
+
+  // Grace + Michaela notes — persist to localStorage
+  var notesEl = document.getElementById('graceMichaelaNotes');
+  var savedEl = document.getElementById('gmNotesSaved');
+  if (notesEl) {
+    try {
+      var saved = localStorage.getItem('lb-grace-michaela-notes');
+      if (saved) notesEl.value = saved;
+    } catch (e) { /* ignore */ }
+    var saveTimer;
+    notesEl.addEventListener('input', function() {
+      clearTimeout(saveTimer);
+      if (savedEl) savedEl.textContent = 'Saving...';
+      saveTimer = setTimeout(function() {
+        try {
+          localStorage.setItem('lb-grace-michaela-notes', notesEl.value);
+          if (savedEl) {
+            var now = new Date();
+            var hh = now.getHours().toString().padStart(2, '0');
+            var mm = now.getMinutes().toString().padStart(2, '0');
+            savedEl.textContent = 'Saved · ' + hh + ':' + mm;
+          }
+        } catch (e) {
+          if (savedEl) savedEl.textContent = 'Save failed';
+        }
+      }, 400);
+    });
+  }
+});
+</script>
+</body>
+</html>
